@@ -1,5 +1,4 @@
 ﻿using DIP.Interfaces;
-using DIP.Models;
 
 namespace DIP
 {
@@ -18,13 +17,6 @@ namespace DIP
         public bool ValidDiscount(double discount)
         {
             return discount.IsBetween(0, 100);
-        }
-    }
-    public static class ExtendIsBetweenMethod
-    {
-        public static bool IsBetween(this double value, double lower, double higher)
-        {
-            return value < higher && lower < value;
         }
     }
 }
