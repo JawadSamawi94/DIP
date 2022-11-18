@@ -1,5 +1,5 @@
 ﻿using DIP.Interfaces;
-using Microsoft.AspNetCore.Http;
+using DIP.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DIP.Controllers
@@ -8,24 +8,16 @@ namespace DIP.Controllers
     [Route("[controller]")]
     public class PaymentController : Controller
     {
-        private IPayment _paymentService;
-        public PaymentController (IPayment paymentService)
+        private readonly IPaymentService<IPayment> _paymentService;
+        public PaymentController (IPaymentService<IPayment> paymentService)
         {
             _paymentService = paymentService;
         }
         [HttpPost]
         public ActionResult Pay(int total, double discount)
         {
-            try
-            {
-                _paymentService.Total = total;
-                _paymentService.Discount = discount / 100;
-                return Ok(_paymentService.Pay());
-            }
-            catch
-            {
-                return View();
-            }
+            IPayment payment = new CardPayment(total, discount);
+            return Ok(_paymentService.Pay(payment));
         }
     }
 }

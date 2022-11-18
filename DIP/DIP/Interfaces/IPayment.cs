@@ -4,6 +4,6 @@
     {
         public int Total { get; set; }
         public double Discount { get; set; }
-        public string Pay();
+
     }
 }
