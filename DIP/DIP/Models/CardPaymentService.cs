@@ -3,7 +3,7 @@ using DIP.Models;
 
 namespace DIP
 {
-    public class CardPaymentService<CardPayment> : IPaymentService<CardPayment> where CardPayment : IPayment
+    public class CardPaymentService : IPaymentService<CardPayment>
     {
         public string Pay(CardPayment payment )
         {
