@@ -7,6 +7,7 @@ namespace DIP.Middleware
     public class ErrorHandlerMiddleware
     {
         private readonly RequestDelegate _next;
+        private LogBase _logBase = new FileLogger();
 
         public ErrorHandlerMiddleware(RequestDelegate next)
         {
@@ -36,7 +37,9 @@ namespace DIP.Middleware
                         break;
                 }
 
-                string result = JsonSerializer.Serialize(new { message = "FromMiddleWare:-" + error?.Message });
+                var err = new { message = "FromMiddleWare:-" + error?.Message };
+                string result = JsonSerializer.Serialize(err);
+                _logBase.Log($"error --> {err.message}");
                 await response.WriteAsync(result);
             }
         }
