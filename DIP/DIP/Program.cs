@@ -1,5 +1,6 @@
 using DIP;
 using DIP.Interfaces;
+using DIP.Middleware;
 using DIP.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,7 +22,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseMiddleware<ErrorHandlerMiddleware>();
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

@@ -12,7 +12,7 @@ namespace DIP
                 double totalAfterDiscount = payment.Total - discountAmount;
                 return $"Payment Successful. Total: {payment.Total}, After Discount {totalAfterDiscount}";
             } else {
-                throw new Exception("Discount is not Valid");
+                throw new DIPException("Discount is not Valid");
             }
         }
 
